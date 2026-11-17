@@ -47,7 +47,7 @@ Deno.serve(async (req) => {
     if (origin && !allowedOrigins.has(origin)) {
       return new Response("Origin not allowed", { status: 403 });
     }
-    return new Response("ok", { status: 204, headers: corsHeaders(origin) });
+    return new Response(null, { status: 204, headers: corsHeaders(origin) });
   }
   if (req.method !== "POST") return json({ error: "Method not allowed" }, 405, origin);
 
