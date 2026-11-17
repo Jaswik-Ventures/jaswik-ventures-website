@@ -1,0 +1,18 @@
+# Environment secrets
+.env
+.env.*
+!.env.example
+
+# Dependencies and build output
+node_modules/
+dist/
+build/
+
+# Supabase local state
+supabase/.temp/
+supabase/.branches/
+
+# OS and editor files
+.DS_Store
+Thumbs.db
+.vscode/

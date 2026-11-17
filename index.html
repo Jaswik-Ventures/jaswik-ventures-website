@@ -1,0 +1,514 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#0F172A">
+  <meta name="description" content="Jaswik Ventures — PCB design, KiCad engineering and end-to-end IoT product development for startups and businesses.">
+  <title>Jaswik Ventures | Hardware Engineering & PCB Design</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root{--navy:#0F172A;--navy2:#162238;--slate:#475569;--muted:#64748b;--line:#e2e8f0;--light:#F8FAFC;--white:#fff;--cyan:#19AEBB;--blue:#005BC2;--pale:#E6F1FB;--green:#137B83;--shadow:0 18px 50px rgba(15,23,42,.09);--radius:20px}
+    *{box-sizing:border-box}html{scroll-behavior:smooth;scroll-padding-top:90px}body{margin:0;background:var(--white);color:var(--navy);font-family:"Plus Jakarta Sans",sans-serif;line-height:1.65}a{color:inherit;text-decoration:none}button,input,select,textarea{font:inherit}button{cursor:pointer}.mono{font-family:"JetBrains Mono",monospace}.container{width:min(1240px,calc(100% - 44px));margin:auto}.eyebrow{display:inline-flex;align-items:center;gap:9px;color:var(--blue);font-size:.76rem;font-weight:800;letter-spacing:.13em;text-transform:uppercase}.eyebrow:before{content:"";width:24px;height:2px;background:var(--cyan)}.section{padding:100px 0}.section-head{max-width:680px;margin-bottom:42px}.section-head h2{font-size:clamp(2rem,4vw,3rem);line-height:1.15;letter-spacing:-.045em;margin:14px 0}.section-head p{color:var(--slate);margin:0;font-size:1.02rem}.btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;padding:13px 19px;border-radius:11px;font-weight:800;font-size:.9rem;border:1px solid transparent;transition:.2s}.btn:hover{transform:translateY(-2px)}.btn-primary{background:var(--cyan);color:#062033;box-shadow:0 8px 22px rgba(6,182,212,.2)}.btn-primary:hover{background:#36BEC7}.btn-dark{background:var(--navy);color:white}.btn-outline{border-color:#cbd5e1;color:var(--navy);background:white}.btn-outline:hover{border-color:var(--cyan);color:var(--blue)}.nav-wrap{position:sticky;top:0;z-index:50;background:rgba(255,255,255,.92);backdrop-filter:blur(14px);border-bottom:1px solid rgba(226,232,240,.85)}.navbar{height:76px;display:flex;align-items:center;justify-content:space-between;gap:24px}.brand{display:flex;align-items:center;gap:11px;font-weight:800;letter-spacing:-.04em;font-size:1.08rem}.brand-logo{width:58px;height:38px;object-fit:contain;display:block;flex:0 0 auto}.nav-links{display:flex;align-items:center;gap:28px;color:#475569;font-size:.87rem;font-weight:700}.nav-links a:hover{color:var(--blue)}.nav-actions{display:flex;align-items:center;gap:10px}.menu-btn{display:none;background:none;border:0;font-size:1.5rem;color:var(--navy)}
+    .hero{background:radial-gradient(circle at 80% 20%,rgba(6,182,212,.16),transparent 30%),linear-gradient(125deg,#0b1427,#14243c 68%,#0f2c43);color:white;position:relative;overflow:hidden;padding:104px 0 96px}.hero:after{content:"";position:absolute;right:-90px;bottom:-280px;width:600px;height:600px;border:1px solid rgba(34,211,238,.17);border-radius:50%;box-shadow:0 0 0 45px rgba(34,211,238,.025),0 0 0 90px rgba(34,211,238,.02)}.hero-grid{display:grid;grid-template-columns:1.15fr .85fr;align-items:center;gap:64px;position:relative;z-index:1}.hero .eyebrow{color:#8AD9DE}.hero h1{font-size:clamp(2.7rem,5.5vw,4.8rem);line-height:1.06;letter-spacing:-.065em;margin:20px 0}.hero h1 span{color:#8AD9DE}.hero-copy{max-width:650px;color:#cbd5e1;font-size:1.08rem}.hero-buttons{display:flex;flex-wrap:wrap;gap:12px;margin-top:30px}.hero .btn-outline{background:transparent;color:white;border-color:#64748b}.hero .btn-outline:hover{border-color:#8AD9DE;color:#8AD9DE}.hero-meta{display:flex;gap:24px;flex-wrap:wrap;margin-top:42px;color:#cbd5e1;font-size:.8rem}.hero-meta span{display:flex;align-items:center;gap:8px}.hero-meta b{color:#8AD9DE}.hero-visual{min-height:390px;position:relative;display:grid;place-items:center}.board{width:min(100%,420px);aspect-ratio:1.12;border-radius:24px;background:linear-gradient(145deg,#123b4c,#0b2639);border:1px solid rgba(103,232,249,.35);box-shadow:0 35px 80px rgba(0,0,0,.35);position:relative;overflow:hidden;transform:rotate(-5deg)}.board:before{content:"";position:absolute;inset:22px;border:1px dashed rgba(103,232,249,.28);border-radius:15px;background:repeating-linear-gradient(0deg,transparent 0 34px,rgba(34,211,238,.08) 35px 36px),repeating-linear-gradient(90deg,transparent 0 34px,rgba(34,211,238,.08) 35px 36px)}.chip{position:absolute;left:38%;top:34%;width:105px;height:105px;background:linear-gradient(145deg,#334155,#0f172a);border:2px solid #8AD9DE;border-radius:13px;box-shadow:0 0 35px rgba(6,182,212,.22);display:grid;place-items:center;color:#B9E6E8;font:600 .7rem "JetBrains Mono";z-index:2}.chip:before,.chip:after{content:"";position:absolute;inset:-9px;border-left:5px dotted #8AD9DE;border-right:5px dotted #8AD9DE;opacity:.75}.chip:after{transform:rotate(90deg)}.trace{position:absolute;height:2px;background:#36BEC7;opacity:.7;z-index:1}.t1{width:120px;top:32%;left:9%;transform:rotate(15deg)}.t2{width:135px;top:65%;right:7%;transform:rotate(-20deg)}.t3{width:95px;top:19%;right:13%;transform:rotate(60deg)}
+    .pcb-board .trace{height:3px;background:linear-gradient(90deg,rgba(25,174,187,.22),#19AEBB 48%,rgba(25,174,187,.22));box-shadow:0 0 7px rgba(25,174,187,.25);overflow:visible}
+    .pcb-board .trace:after{content:"";position:absolute;top:-3px;left:0;width:8px;height:8px;border-radius:50%;background:#b9f7f4;box-shadow:0 0 9px 3px #19AEBB;animation:currentFlow 2.8s linear infinite}
+    .pcb-board .t1{width:32%;top:30%;left:8%;transform:rotate(12deg)}
+    .pcb-board .t2{width:34%;top:67%;right:5%;transform:rotate(-24deg)}
+    .pcb-board .t3{width:25%;top:19%;right:12%;transform:rotate(58deg)}
+    .pcb-board .t4{width:24%;top:78%;left:19%;transform:rotate(-8deg)}
+    .pcb-board .t5{width:22%;top:43%;right:5%;transform:rotate(90deg)}
+    .pcb-board .t6{width:18%;top:17%;left:23%;transform:rotate(90deg)}
+    .pcb-board .t7{width:21%;top:83%;right:30%;transform:rotate(90deg)}
+    .pcb-board .t8{width:18%;top:48%;left:7%;transform:rotate(90deg)}
+    .pcb-board .t9{width:25%;top:25%;left:55%;transform:rotate(-18deg)}
+    .pcb-board .t2:after,.pcb-board .t4:after,.pcb-board .t6:after{animation-delay:-1.1s}
+    .pcb-board .t3:after,.pcb-board .t5:after,.pcb-board .t8:after{animation-delay:-1.9s}
+    @keyframes currentFlow{from{left:0;opacity:.2}12%{opacity:1}88%{opacity:1}to{left:calc(100% - 8px);opacity:.2}}
+    .pcb-part{position:absolute;z-index:2;background:linear-gradient(145deg,#475569,#172338);border:1px solid #8AD9DE;box-shadow:0 0 12px rgba(25,174,187,.16)}
+    .resistor{width:34px;height:13px;border-radius:4px;display:flex;justify-content:space-between;align-items:center;padding:0 3px}
+    .resistor i{height:9px;width:3px;background:#cbd5e1;border-radius:1px}
+    .part-r1{left:17%;top:20%;transform:rotate(90deg)}.part-r2{right:18%;bottom:23%;transform:rotate(-20deg)}
+    .capacitor{width:16px;height:27px;border-radius:3px;background:linear-gradient(90deg,#cbd5e1 0 18%,#334155 18% 82%,#cbd5e1 82%)}
+    .part-c1{left:25%;bottom:19%}.part-c2{right:22%;top:21%;transform:rotate(90deg)}
+    .connector{left:8%;bottom:33%;width:17px;height:48px;border-radius:3px;display:flex;flex-direction:column;justify-content:space-evenly;padding:3px;background:#1e293b}
+    .connector i{height:4px;background:#67e8f9;border-radius:1px}
+    .ic-small{right:13%;top:48%;width:34px;height:29px;border-radius:4px;display:grid;place-items:center;color:#a5f3fc;font:600 .5rem "JetBrains Mono"}
+    .via{position:absolute;z-index:3;width:9px;height:9px;border:2px solid #8AD9DE;border-radius:50%;background:#0b2639;box-shadow:0 0 6px rgba(25,174,187,.5)}
+    .via1{left:31%;top:29%}.via2{right:29%;top:69%}.via3{left:18%;bottom:18%}.via4{right:15%;top:27%}
+    @media(prefers-reduced-motion:reduce){.pcb-board .trace:after{animation:none;display:none}}
+.board-label{position:absolute;bottom:26px;left:30px;color:#8AD9DE;font:500 .65rem "JetBrains Mono";letter-spacing:.16em}.float-tag{position:absolute;background:white;color:var(--navy);padding:12px 16px;border-radius:12px;box-shadow:var(--shadow);font-size:.76rem;font-weight:800}.tag-a{top:24px;right:-12px}.tag-b{bottom:20px;left:-20px}.float-tag small{display:block;color:var(--muted);font-weight:600;font-size:.65rem}
+    .trust-strip{border-bottom:1px solid var(--line);background:#fff}.trust-inner{display:flex;justify-content:space-between;gap:22px;align-items:center;padding:22px 0;color:#64748b;font-size:.8rem;font-weight:700;flex-wrap:wrap}.trust-inner strong{color:var(--navy)}.trust-item{display:flex;align-items:center;gap:9px}.dot{width:7px;height:7px;background:var(--cyan);border-radius:50%}
+    .services{background:var(--light)}.service-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}.service-card{padding:26px 22px;background:white;border:1px solid var(--line);border-radius:16px;transition:.25s}.service-card:hover{transform:translateY(-5px);border-color:#8BC7E7;box-shadow:var(--shadow)}.service-icon{width:46px;height:46px;border-radius:13px;background:#E6F1FB;color:#005BC2;display:grid;place-items:center;font-size:1.25rem;margin-bottom:22px}.service-card h3{font-size:1.02rem;line-height:1.35;margin:0 0 10px}.service-card p{font-size:.84rem;color:var(--slate);margin:0}.service-card .mini{display:block;margin-top:18px;color:var(--blue);font:500 .68rem "JetBrains Mono"}
+    .product-section{background:var(--navy);color:white;overflow:hidden}.product-grid{display:grid;grid-template-columns:.95fr 1.05fr;gap:70px;align-items:center}.product-art{min-height:390px;border-radius:24px;background:radial-gradient(circle at 50% 45%,rgba(6,182,212,.24),transparent 48%),linear-gradient(145deg,#1e344e,#0a1528);border:1px solid #29445f;display:grid;place-items:center;position:relative;overflow:hidden}.tank{width:190px;height:230px;border:4px solid #94a3b8;border-top:0;border-radius:0 0 28px 28px;position:relative;overflow:visible;background:transparent;box-shadow:0 0 50px rgba(6,182,212,.12)}.tank:before{content:"";position:absolute;left:-13px;right:-13px;top:-5px;height:10px;border-radius:8px;background:#cbd5e1;z-index:4}.tank:after{content:"";position:absolute;left:50%;top:22px;bottom:20px;border-left:2px dashed #8AD9DE;opacity:.65;z-index:3;pointer-events:none}.water-fill{position:absolute;left:0;right:0;bottom:0;height:58%;border-radius:0 0 21px 21px;background:linear-gradient(180deg,rgba(25,174,187,.78),rgba(0,91,194,.88));transition:height .12s linear;overflow:hidden}.water-fill:before{content:"";position:absolute;left:-15%;right:-15%;top:0;height:9px;background:rgba(138,217,222,.65);border-radius:50%;filter:blur(2px)}.waterline{position:absolute;left:0;right:0;bottom:58%;border-top:2px solid #8AD9DE;box-shadow:0 0 12px #19AEBB;z-index:2;transition:bottom .12s linear}.sensor{position:absolute;top:22px;right:-66px;min-width:54px;height:48px;padding:0 8px;border-radius:12px;background:#0f172a;border:1px solid #19AEBB;color:#8AD9DE;display:grid;place-items:center;font:600 .82rem "JetBrains Mono";box-shadow:0 0 22px rgba(25,174,187,.14);z-index:5}.product-pill{position:absolute;top:24px;left:24px;padding:7px 11px;border:1px solid #31536b;border-radius:99px;color:#B9E6E8;font:500 .67rem "JetBrains Mono"}.product-stat{position:absolute;bottom:25px;right:25px;background:#0f172a;border:1px solid #31536b;border-radius:12px;padding:12px 15px;font:500 .72rem "JetBrains Mono";color:#B9E6E8}.product-section .eyebrow{color:#8AD9DE}.product-section h2{font-size:clamp(2.3rem,4vw,3.5rem);line-height:1.1;letter-spacing:-.05em;margin:15px 0}.product-section h2 span{color:#8AD9DE}.product-section p{color:#cbd5e1}.product-features{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin:27px 0 30px}.product-feature{display:flex;gap:10px;align-items:flex-start;color:#e2e8f0;font-size:.86rem}.check{color:#8AD9DE;font-weight:900}
+    .process-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:0}.step{padding:25px 24px 25px 0;position:relative;border-top:1px solid var(--line)}.step:not(:last-child):after{content:"→";position:absolute;right:18px;top:-16px;background:white;padding:0 7px;color:var(--cyan);font-size:1.2rem}.step-no{font:600 .78rem "JetBrains Mono";color:var(--blue)}.step h3{font-size:1rem;margin:13px 0 8px}.step p{font-size:.82rem;color:var(--slate);margin:0;max-width:220px}
+    .quote-section{background:#f1f5f9}.quote-layout{display:grid;grid-template-columns:.62fr 1.38fr;gap:26px;align-items:start;width:min(1320px,calc(100% - 44px));margin-left:max(22px,calc((100vw - 1320px)/2));margin-right:auto}.quote-intro{position:sticky;top:110px}.quote-intro h2{font-size:clamp(2.2rem,4vw,3.25rem);line-height:1.1;letter-spacing:-.055em;margin:14px 0}.quote-intro p{color:var(--slate)}.quote-points{display:grid;gap:12px;margin-top:26px}.quote-point{display:flex;gap:10px;color:#475569;font-size:.83rem}.quote-point b{color:var(--blue)}.calculator{background:white;border:1px solid #dbe4ee;border-radius:22px;box-shadow:var(--shadow);overflow:hidden}.calc-top{padding:25px 28px;background:var(--navy);color:white;display:flex;justify-content:space-between;align-items:center;gap:20px}.calc-top h3{margin:0;font-size:1.15rem}.calc-top p{margin:4px 0 0;color:#94a3b8;font-size:.76rem}.currency-switch{display:flex;padding:4px;border-radius:10px;background:#26364d;gap:3px}.currency-switch button{border:0;background:transparent;color:#cbd5e1;padding:7px 12px;border-radius:7px;font:600 .75rem "JetBrains Mono"}.currency-switch button.active{background:var(--cyan);color:#082f49}.calc-body{padding:28px}.form-grid{display:grid;grid-template-columns:1fr 1fr;gap:22px 18px}.field.full{grid-column:1/-1}.field label,.field-title{display:block;font-size:.8rem;font-weight:800;margin-bottom:8px}.field-hint{font-size:.7rem;color:#64748b;font-weight:500;display:block;margin-top:3px;line-height:1.45}.field select,.field input[type=number]{width:100%;border:1px solid #cbd5e1;background:#fff;border-radius:9px;padding:11px 12px;color:var(--navy);outline:none}.field select:focus,.field input:focus{border-color:var(--blue);box-shadow:0 0 0 3px rgba(2,132,199,.1)}.range-row{display:flex;align-items:center;gap:15px}.range-row input{flex:1;accent-color:var(--blue)}.range-value{min-width:54px;text-align:right;font:600 .8rem "JetBrains Mono";color:var(--blue)}.choice-list{display:grid;gap:9px}.choice{display:flex;align-items:flex-start;gap:10px;border:1px solid #e2e8f0;padding:11px 12px;border-radius:10px;cursor:pointer;transition:.15s}.choice:hover{border-color:#8BC7E7;background:#f8fdff}.choice:has(input:checked){border-color:#3B91D0;background:#F1F8FC}.choice input{margin:4px 0 0;accent-color:var(--blue)}.choice-copy{min-width:0}.choice-copy strong{display:block;font-size:.78rem;line-height:1.4}.choice-copy small{display:block;color:#64748b;font-size:.69rem;line-height:1.45;margin-top:3px}.custom-count{display:flex;align-items:center;gap:10px;margin:8px 0 0 27px}.custom-count label{font-size:.72rem;color:#475569;margin:0}.custom-count input{width:76px!important;padding:7px!important}.calc-divider{border:0;border-top:1px solid #e2e8f0;margin:25px 0}.result{background:#f8fafc;border:1px solid #e2e8f0;border-radius:15px;padding:20px}.result-head{display:flex;justify-content:space-between;gap:15px;align-items:center}.result-head strong{font-size:.9rem}.result-head span{font:500 .68rem "JetBrains Mono";color:#64748b}.total-range{font:700 clamp(1.5rem,3vw,2.15rem) "JetBrains Mono";letter-spacing:-.06em;color:var(--navy);margin:9px 0 3px}.total-note{font-size:.7rem;color:#64748b}.breakdown{margin-top:18px;display:grid;gap:9px}.break-row{display:flex;justify-content:space-between;gap:15px;font-size:.76rem;color:#475569}.break-row span:last-child{font:500 .72rem "JetBrains Mono";color:var(--navy);white-space:nowrap}.break-row.total{border-top:1px solid #dbe4ee;padding-top:10px;margin-top:2px;font-weight:800;color:var(--navy)}.delivery{display:flex;justify-content:space-between;align-items:center;background:#EAF8F8;border:1px solid #B9E6E8;border-radius:10px;padding:12px 14px;margin-top:16px;font-size:.77rem}.delivery strong{font:600 .78rem "JetBrains Mono";color:#137B83}.copy-btn{width:100%;margin-top:16px;border:0}.disclaimer{font-size:.68rem;color:#64748b;line-height:1.55;margin:13px 0 0}.contact-quote-btn{width:100%;margin-top:16px;border:0}
+    .enquiry-form{margin-top:17px}.enquiry-fields{display:grid;grid-template-columns:1fr 1fr;gap:12px}.enquiry-fields .field label{margin-bottom:6px}.enquiry-fields .field label span{color:#dc2626}.enquiry-fields input{width:100%;border:1px solid #cbd5e1;background:#fff;border-radius:9px;padding:11px 12px;color:var(--navy);outline:none}.enquiry-fields input:focus{border-color:var(--blue);box-shadow:0 0 0 3px rgba(0,91,194,.1)}.enquiry-fields input:invalid:not(:placeholder-shown){border-color:#dc2626}.enquiry-help{font-size:.68rem;color:#64748b;margin:8px 0 0;line-height:1.45}
+    @media(max-width:700px){.enquiry-fields{grid-template-columns:1fr}}
+
+    .contact{background:var(--navy);color:white;padding:75px 0}.contact-grid{display:flex;justify-content:space-between;align-items:center;gap:30px}.contact h2{font-size:clamp(2rem,4vw,3rem);line-height:1.1;letter-spacing:-.05em;margin:12px 0}.contact p{color:#cbd5e1;max-width:570px}.contact-actions{display:flex;flex-wrap:wrap;gap:10px}.contact .eyebrow{color:#8AD9DE}.footer{background:#09111f;color:#94a3b8;padding:25px 0}.footer-inner{display:flex;justify-content:space-between;gap:20px;align-items:center;flex-wrap:wrap;font-size:.75rem}.footer-brand{color:white;font-weight:800}.footer-links{display:flex;gap:18px;flex-wrap:wrap}.footer a:hover{color:#8AD9DE}
+    @media(max-width:950px){.hero-grid{gap:28px}.service-grid{grid-template-columns:repeat(2,1fr)}.quote-layout{grid-template-columns:1fr;width:min(100% - 32px,560px);margin:0 auto}.quote-intro{position:static}.quote-intro p{max-width:650px}.quote-points{grid-template-columns:repeat(3,1fr)}.product-grid{gap:35px}.process-grid{grid-template-columns:repeat(2,1fr);gap:20px}.step:nth-child(2):after{display:none}}
+    @media(max-width:700px){.container{width:min(100% - 32px,560px)}.section{padding:72px 0}.navbar{height:68px}.menu-btn{display:block}.nav-actions>.btn{display:none}.nav-links{display:none;position:absolute;top:68px;left:0;right:0;padding:18px 22px 22px;background:white;border-bottom:1px solid var(--line);flex-direction:column;align-items:flex-start;gap:17px}.nav-links.open{display:flex}.hero{padding:76px 0 65px}.hero-grid{grid-template-columns:1fr}.hero h1{font-size:clamp(2.55rem,12vw,4rem)}.hero-visual{min-height:310px;margin:10px 18px 0}.board{max-width:340px}.tag-a{right:-12px}.tag-b{left:-12px}.hero-meta{gap:14px}.trust-inner{justify-content:flex-start;gap:15px 24px}.trust-inner>strong{width:100%}.service-grid{grid-template-columns:1fr}.service-card{padding:23px}.product-grid{grid-template-columns:1fr}.product-art{min-height:320px;order:2}.product-features{grid-template-columns:1fr}.process-grid{grid-template-columns:1fr;gap:15px}.step{padding:18px 0}.step:after{display:none!important}.quote-points{grid-template-columns:1fr}.calc-top{padding:20px;align-items:flex-start;flex-direction:column}.calc-body{padding:19px}.form-grid{grid-template-columns:1fr;gap:18px}.field.full{grid-column:auto}.result{padding:16px}.contact-grid{align-items:flex-start;flex-direction:column}.footer-inner{align-items:flex-start;flex-direction:column}}
+    /* Compact calculator layout: tighter spacing and side-by-side option cards. */
+    .calc-top{padding:19px 24px}
+    .calc-body{padding:21px 24px}
+    .form-grid{gap:14px 14px}
+    .field label,.field-title{margin-bottom:6px;font-size:.76rem}
+    .field-hint{font-size:.66rem;line-height:1.35}
+    .choice-list{gap:7px}
+    .choice{padding:8px 10px;gap:8px;border-radius:8px}
+    .choice input{margin-top:3px}
+    .choice-copy strong{font-size:.72rem;line-height:1.3}
+    .choice-copy small{font-size:.63rem;line-height:1.35;margin-top:2px}
+    .field:has(.complexity) .choice-list,
+    .field:has(.addon) .choice-list{grid-template-columns:repeat(2,minmax(0,1fr))}
+    .field:has(input[name="starting"]) .choice-list{grid-template-columns:repeat(3,minmax(0,1fr))}
+    .field:has(input[name="speed"]) .choice-list{grid-template-columns:repeat(2,minmax(0,1fr))}
+    .custom-count{margin:5px 0 0 22px;gap:7px}
+    .custom-count label{font-size:.65rem}
+    .custom-count input{width:64px!important;padding:5px!important;font-size:.72rem}
+    .calc-divider{margin:17px 0}
+    .result{padding:16px}
+    .breakdown{margin-top:12px;gap:6px}
+    .delivery{margin-top:12px;padding:9px 12px}
+    .copy-btn{margin-top:12px;padding:11px 15px}
+    .disclaimer{font-size:.64rem;margin-top:9px}
+    @media(max-width:700px){
+      .calc-body{padding:16px}
+      .field:has(.complexity) .choice-list,
+      .field:has(.addon) .choice-list{grid-template-columns:1fr}
+      .field:has(input[name="starting"]) .choice-list{grid-template-columns:1fr}
+      .field:has(input[name="speed"]) .choice-list{grid-template-columns:1fr 1fr}
+    }
+    @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*,*:before,*:after{transition:none!important}}
+  
+    /* Enquiry integration */
+    .enquiry-actions{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:4px}
+    .btn-whatsapp{background:#15803d;color:#fff;border:1px solid #15803d}
+    .btn-whatsapp:hover{background:#166534}
+    .enquiry-help[data-state="error"]{color:#b91c1c}
+    .enquiry-help[data-state="success"]{color:#047857}
+    .enquiry-help[data-state="pending"]{color:#0369a1}
+    .honeypot{position:absolute!important;left:-10000px!important;width:1px!important;height:1px!important;opacity:0!important;pointer-events:none!important}
+    @media(max-width:560px){.enquiry-actions{grid-template-columns:1fr}}
+
+  </style>
+</head>
+<body>
+  <div class="nav-wrap">
+    <nav class="navbar container" aria-label="Main navigation">
+      <a class="brand" href="#home"><img class="brand-logo" src="data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiIHN0YW5kYWxvbmU9Im5vIj8+CjwhLS0gQ3JlYXRlZCB3aXRoIElua3NjYXBlIChodHRwOi8vd3d3Lmlua3NjYXBlLm9yZy8pIC0tPgoKPHN2ZwogICB2ZXJzaW9uPSIxLjEiCiAgIGlkPSJzdmcxIgogICB3aWR0aD0iNTI4LjMwNDY5IgogICBoZWlnaHQ9IjI5OC43Njk4NCIKICAgdmlld0JveD0iMCAwIDUyOC4zMDQ2OSAyOTguNzY5ODQiCiAgIHhtbG5zOnhsaW5rPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5L3hsaW5rIgogICB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciCiAgIHhtbG5zOnN2Zz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciPgogIDxkZWZzCiAgICAgaWQ9ImRlZnMxIj4KICAgIDxjb2xvci1wcm9maWxlCiAgICAgICBuYW1lPSJzUkdCIElFQzYxOTY2LTIuMSIKICAgICAgIHhsaW5rOmhyZWY9ImRhdGE6YXBwbGljYXRpb24vdm5kLmljY3Byb2ZpbGU7YmFzZTY0LEFBQU1iRXhwYm04Q0VBQUFiVzUwY2xKSFFpQllXVm9nQjg0QUFnQUpBQVlBTVFBQVlXTnpjRTFUUmxRQUFBQUFTVVZESUhOU1IwSUFBQUFBQUFBQUFBQUFBQUFBQVBiV0FBRUFBQUFBMHkxSVVDQWdBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFSWTNCeWRBQUFBVkFBQUFBelpHVnpZd0FBQVlRQUFBQ1FkM1J3ZEFBQUFoUUFBQUFVWW10d2RBQUFBaWdBQUFBVWNsaFpXZ0FBQWp3QUFBQVVaMWhaV2dBQUFsQUFBQUFVWWxoWldnQUFBbVFBQUFBVVpHMXVaQUFBQW5nQUFBQndaRzFrWkFBQUF1Z0FBQUNJZG5WbFpBQUFBM0FBQUFDR2RtbGxkd0FBQS9nQUFBQWtiSFZ0YVFBQUJCd0FBQUFVYldWaGN3QUFCREFBQUFBa2RHVmphQUFBQkZRQUFBQU1jbFJTUXdBQUJHQUFBQWdNWjFSU1F3QUFCR0FBQUFnTVlsUlNRd0FBQkdBQUFBZ01kR1Y0ZEFBQUFBQkRiM0I1Y21sbmFIUWdLR01wSURFNU9UZ2dTR1YzYkdWMGRDMVFZV05yWVhKa0lFTnZiWEJoYm5rQUFHUmxjMk1BQUFBQUFBQUFFbk5TUjBJZ1NVVkROakU1TmpZdE1pNHhBQUFBQUFBQUFBQVNBSE1BVWdCSEFFSUFJQUJKQUVVQVF3QTJBREVBT1FBMkFEWUFMUUF5QUM0QU1RQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFGaFpXaUFBQUFBQUFBRHpVUUFCQUFBQUFSYk1XRmxhSUFBQUFBQUFBQUFBQUFBQUFBQUFBQUJZV1ZvZ0FBQUFBQUFBYjZJQUFEajFBQUFEa0ZoWldpQUFBQUFBQUFCaW1RQUF0NFVBQUJqYVdGbGFJQUFBQUFBQUFDU2dBQUFQaEFBQXRzOWtaWE5qQUFBQUFBQUFBQlpKUlVNZ2FIUjBjRG92TDNkM2R5NXBaV011WTJnQUFBQUFBQUFBQUFBQUFCWkpSVU1nYUhSMGNEb3ZMM2QzZHk1cFpXTXVZMmdBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBWkdWell3QUFBQUFBQUFBdVNVVkRJRFl4T1RZMkxUSXVNU0JFWldaaGRXeDBJRkpIUWlCamIyeHZkWElnYzNCaFkyVWdMU0J6VWtkQ0FBQUFBQUFBQUFBQUFBQXVTVVZESURZeE9UWTJMVEl1TVNCRVpXWmhkV3gwSUZKSFFpQmpiMnh2ZFhJZ2MzQmhZMlVnTFNCelVrZENBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUdSbGMyTUFBQUFBQUFBQUxGSmxabVZ5Wlc1alpTQldhV1YzYVc1bklFTnZibVJwZEdsdmJpQnBiaUJKUlVNMk1UazJOaTB5TGpFQUFBQUFBQUFBQUFBQUFDeFNaV1psY21WdVkyVWdWbWxsZDJsdVp5QkRiMjVrYVhScGIyNGdhVzRnU1VWRE5qRTVOall0TWk0eEFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFCMmFXVjNBQUFBQUFBVHBQNEFGRjh1QUJEUEZBQUQ3Y3dBQkJNTEFBTmNuZ0FBQUFGWVdWb2dBQUFBQUFCTUNWWUFVQUFBQUZjZjUyMWxZWE1BQUFBQUFBQUFBUUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUtQQUFBQUFuTnBaeUFBQUFBQVExSlVJR04xY25ZQUFBQUFBQUFFQUFBQUFBVUFDZ0FQQUJRQUdRQWVBQ01BS0FBdEFESUFOd0E3QUVBQVJRQktBRThBVkFCWkFGNEFZd0JvQUcwQWNnQjNBSHdBZ1FDR0FJc0FrQUNWQUpvQW53Q2tBS2tBcmdDeUFMY0F2QURCQU1ZQXl3RFFBTlVBMndEZ0FPVUE2d0R3QVBZQSt3RUJBUWNCRFFFVEFSa0JId0VsQVNzQk1nRTRBVDRCUlFGTUFWSUJXUUZnQVdjQmJnRjFBWHdCZ3dHTEFaSUJtZ0doQWFrQnNRRzVBY0VCeVFIUkFka0I0UUhwQWZJQitnSURBZ3dDRkFJZEFpWUNMd0k0QWtFQ1N3SlVBbDBDWndKeEFub0NoQUtPQXBnQ29nS3NBcllDd1FMTEF0VUM0QUxyQXZVREFBTUxBeFlESVFNdEF6Z0RRd05QQTFvRFpnTnlBMzREaWdPV0E2SURyZ082QThjRDB3UGdBK3dEK1FRR0JCTUVJQVF0QkRzRVNBUlZCR01FY1FSK0JJd0VtZ1NvQkxZRXhBVFRCT0VFOEFUK0JRMEZIQVVyQlRvRlNRVllCV2NGZHdXR0JaWUZwZ1cxQmNVRjFRWGxCZllHQmdZV0JpY0dOd1pJQmxrR2FnWjdCb3dHblFhdkJzQUcwUWJqQnZVSEJ3Y1pCeXNIUFFkUEIyRUhkQWVHQjVrSHJBZS9COUlINVFmNENBc0lId2d5Q0VZSVdnaHVDSUlJbGdpcUNMNEkwZ2puQ1BzSkVBa2xDVG9KVHdsa0NYa0pqd21rQ2JvSnp3bmxDZnNLRVFvbkNqMEtWQXBxQ29FS21BcXVDc1VLM0FyekN3c0xJZ3M1QzFFTGFRdUFDNWdMc0F2SUMrRUwrUXdTRENvTVF3eGNESFVNamd5bkRNQU0yUXp6RFEwTkpnMUFEVm9OZEEyT0Rha053dzNlRGZnT0V3NHVEa2tPWkE1L0Rwc090ZzdTRHU0UENROGxEMEVQWGc5NkQ1WVBzdy9QRCt3UUNSQW1FRU1RWVJCK0VKc1F1UkRYRVBVUkV4RXhFVThSYlJHTUVhb1J5UkhvRWdjU0poSkZFbVFTaEJLakVzTVM0eE1ERXlNVFF4TmpFNE1UcEJQRkUrVVVCaFFuRkVrVWFoU0xGSzBVemhUd0ZSSVZOQlZXRlhnVm14VzlGZUFXQXhZbUZra1diQmFQRnJJVzFoYjZGeDBYUVJkbEY0a1hyaGZTRi9jWUd4aEFHR1VZaWhpdkdOVVkraGtnR1VVWmF4bVJHYmNaM1JvRUdpb2FVUnAzR3A0YXhScnNHeFFiT3h0akc0b2JzaHZhSEFJY0toeFNISHNjb3h6TUhQVWRIaDFISFhBZG1SM0RIZXdlRmg1QUhtb2VsQjYrSHVrZkV4OCtIMmtmbEIrL0grb2dGU0JCSUd3Z21DREVJUEFoSENGSUlYVWhvU0hPSWZzaUp5SlZJb0lpcnlMZEl3b2pPQ05tSTVRandpUHdKQjhrVFNSOEpLc2syaVVKSlRnbGFDV1hKY2NsOXlZbkpsY21oeWEzSnVnbkdDZEpKM29ucXlmY0tBMG9QeWh4S0tJbzFDa0dLVGdwYXltZEtkQXFBaW8xS21ncW15clBLd0lyTml0cEs1MHIwU3dGTERrc2JpeWlMTmN0REMxQkxYWXRxeTNoTGhZdVRDNkNMcmN1N2k4a0wxb3ZrUy9ITC80d05UQnNNS1F3MnpFU01Vb3hnakc2TWZJeUtqSmpNcHN5MURNTk0wWXpmek80TS9FMEt6UmxOSjQwMkRVVE5VMDFoelhDTmYwMk56WnlOcTQyNlRja04yQTNuRGZYT0JRNFVEaU1PTWc1QlRsQ09YODV2RG41T2pZNmREcXlPdTg3TFR0ck82bzc2RHduUEdVOHBEempQU0k5WVQyaFBlQStJRDVnUHFBKzREOGhQMkUvb2ovaVFDTkFaRUNtUU9kQktVRnFRYXhCN2tJd1FuSkN0VUwzUXpwRGZVUEFSQU5FUjBTS1JNNUZFa1ZWUlpwRjNrWWlSbWRHcTBid1J6VkhlMGZBU0FWSVMwaVJTTmRKSFVsalNhbEo4RW8zU24xS3hFc01TMU5MbWt2aVRDcE1ja3k2VFFKTlNrMlRUZHhPSlU1dVRyZFBBRTlKVDVOUDNWQW5VSEZRdTFFR1VWQlJtMUhtVWpGU2ZGTEhVeE5UWDFPcVUvWlVRbFNQVk50VktGVjFWY0pXRDFaY1ZxbFc5MWRFVjVKWDRGZ3ZXSDFZeTFrYVdXbFp1Rm9IV2xaYXBscjFXMFZibFZ2bFhEVmNobHpXWFNkZGVGM0pYaHBlYkY2OVh3OWZZVit6WUFWZ1YyQ3FZUHhoVDJHaVlmVmlTV0tjWXZCalEyT1hZK3RrUUdTVVpPbGxQV1dTWmVkbVBXYVNadWhuUFdlVForbG9QMmlXYU94cFEybWFhZkZxU0dxZmF2ZHJUMnVuYS85c1YyeXZiUWh0WUcyNWJoSnVhMjdFYng1dmVHL1JjQ3R3aG5EZ2NUcHhsWEh3Y2t0eXBuTUJjMTF6dUhRVWRIQjB6SFVvZFlWMTRYWStkcHQyK0hkV2Q3TjRFWGh1ZU14NUtubUplZWQ2Um5xbGV3UjdZM3ZDZkNGOGdYemhmVUY5b1g0QmZtSit3bjhqZjRSLzVZQkhnS2lCQ29GcmdjMkNNSUtTZ3ZTRFY0TzZoQjJFZ0lUamhVZUZxNFlPaG5LRzE0YzdoNStJQklocGlNNkpNNG1aaWY2S1pJcktpekNMbG92OGpHT015bzB4alppTi80NW1qczZQTm8rZWtBYVFicERXa1QrUnFKSVJrbnFTNDVOTms3YVVJSlNLbFBTVlg1WEpsalNXbjVjS2wzV1g0SmhNbUxpWkpKbVFtZnlhYUpyVm0wS2JyNXdjbkltYzk1MWtuZEtlUUo2dW54MmZpNS82b0dtZzJLRkhvYmFpSnFLV293YWpkcVBtcEZha3g2VTRwYW1tR3FhTHB2Mm5icWZncUZLb3hLazNxYW1xSEtxUHF3S3JkYXZwckZ5czBLMUVyYml1TGE2aHJ4YXZpN0FBc0hXdzZyRmdzZGF5UzdMQ3N6aXpyclFsdEp5MUU3V0t0Z0cyZWJid3QyaTM0TGhadU5HNVNybkN1anU2dGJzdXU2ZThJYnlidlJXOWo3NEt2b1MrLzc5NnYvWEFjTURzd1dmQjQ4SmZ3dHZEV01QVXhGSEV6c1ZMeGNqR1JzYkR4MEhIdjhnOXlMekpPc201eWpqS3Q4czJ5N2JNTmN5MXpUWE50YzQyenJiUE44KzQwRG5RdXRFODBiN1NQOUxCMDBUVHh0UkoxTXZWVHRYUjFsWFcyTmRjMStEWVpOam8yV3paOGRwMjJ2dmJnTndGM0lyZEVOMlczaHplb3Q4cDM2L2dOdUM5NFVUaHpPSlQ0dHZqWStQcjVIUGsvT1dFNWczbWx1Y2Y1Nm5vTXVpODZVYnAwT3BiNnVYcmNPdjc3SWJ0RWUyYzdpanV0TzlBNzh6d1dQRGw4WEx4Ly9LTTh4bnpwL1EwOU1MMVVQWGU5bTMyKy9lSytCbjRxUGs0K2NmNlYvcm4rM2Y4Qi95WS9Tbjl1djVML3R6L2JmLy8iCiAgICAgICBpZD0iY29sb3ItcHJvZmlsZTEiIC8+CiAgICA8Y2xpcFBhdGgKICAgICAgIGNsaXBQYXRoVW5pdHM9InVzZXJTcGFjZU9uVXNlIgogICAgICAgaWQ9ImNsaXBQYXRoMjEwLTciPgogICAgICA8cGF0aAogICAgICAgICBkPSJNIDAsNTAwIEggNTAwIFYgMCBIIDAgWiIKICAgICAgICAgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoLTEwNy43MTgzLC0zNDMuMTQ0NTEpIgogICAgICAgICBpZD0icGF0aDIxMC01IiAvPgogICAgPC9jbGlwUGF0aD4KICAgIDxjbGlwUGF0aAogICAgICAgY2xpcFBhdGhVbml0cz0idXNlclNwYWNlT25Vc2UiCiAgICAgICBpZD0iY2xpcFBhdGgyMTItMyI+CiAgICAgIDxwYXRoCiAgICAgICAgIGQ9Ik0gMCw1MDAgSCA1MDAgViAwIEggMCBaIgogICAgICAgICB0cmFuc2Zvcm09InRyYW5zbGF0ZSgtMTY2Ljc0NTYxLC0zNDkuMTYxMTEpIgogICAgICAgICBpZD0icGF0aDIxMi01IiAvPgogICAgPC9jbGlwUGF0aD4KICAgIDxjbGlwUGF0aAogICAgICAgY2xpcFBhdGhVbml0cz0idXNlclNwYWNlT25Vc2UiCiAgICAgICBpZD0iY2xpcFBhdGgyMTQtNiI+CiAgICAgIDxwYXRoCiAgICAgICAgIGQ9Ik0gMCw1MDAgSCA1MDAgViAwIEggMCBaIgogICAgICAgICB0cmFuc2Zvcm09InRyYW5zbGF0ZSgtMTEwLjY3NzIsLTM5Ni44OTE2MSkiCiAgICAgICAgIGlkPSJwYXRoMjE0LTIiIC8+CiAgICA8L2NsaXBQYXRoPgogIDwvZGVmcz4KICA8ZwogICAgIGlkPSJsYXllci1NQzAiCiAgICAgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoLTI2My4zMjQ5MiwtNzYyLjA2MTk0KSI+CiAgICA8cGF0aAogICAgICAgaWQ9InBhdGgyMDktMSIKICAgICAgIGQ9Im0gMCwwIGMgLTYuODE3LDAgLTEzLjIyMiwyLjY0NiAtMTguMDI2LDcuNDUyIC00LjgxOCw0LjgxNyAtNy40NzEsMTEuMjIgLTcuNDcxLDE4LjAzMSAwLDYuODExIDIuNjUzLDEzLjIxMSA3LjQ2OCwxOC4wMjYgbCA2LjI1Niw2LjI1MyAwLjY0LDAuNjI1IGMgMS40MjUsMS4zODYgMy4zMDcsMi4xNTIgNS4yOTQsMi4xNTIgMi4wMjgsMCAzLjkzMywtMC43OSA1LjM2NiwtMi4yMjQgTCA0LjgyNiw0NS4wMiBDIDQuNzg3LDQ0Ljk4MyA0Ljc1MSw0NC45NDcgNC43MTMsNDQuOTA5IEwgLTcuMzU4LDMyLjgzOCBjIC0xLjk2NSwtMS45NjUgLTMuMDQ4LC00LjU3OCAtMy4wNDgsLTcuMzU1IDAsLTIuNzggMS4wODMsLTUuMzkzIDMuMDQ4LC03LjM1OCAxLjk2MywtMS45NjIgNC41NzYsLTMuMDQ1IDcuMzU1LC0zLjA0NSAyLjc4MywwIDUuMzk2LDEuMDggNy4zNjEsMy4wNDMgbCA0MC41NDQsNDAuNTQ1IGMgNC44MDgsNC44MDggMTEuMjA5LDcuNDU0IDE4LjAyOSw3LjQ1NCA2LjgxNywwIDEzLjIyLC0yLjY0NiAxOC4wMjksLTcuNDU0IDAuMDU2LC0wLjA1OSAwLjExNCwtMC4xMTUgMC4xNywtMC4xNzMgLTEuMzE0LDAuMjk3IC0yLjY4MiwwLjQ1IC00LjA4NSwwLjQ1IC02Ljc4NiwwIC0xNC4wMjksLTMuNTA1IC0yMC4zOTIsLTkuODcgTCA1OC41NzMsNDcuOTk5IDQ2LjAyOSwzNS40NTQgMTguMDI5LDcuNDUyIEMgMTMuMjIsMi42NDYgNi44MTcsMCAwLDAiCiAgICAgICBzdHlsZT0iZmlsbDojMDA1YmMyO2ZpbGwtb3BhY2l0eToxO2ZpbGwtcnVsZTpub256ZXJvO3N0cm9rZTpub25lIgogICAgICAgdHJhbnNmb3JtPSJtYXRyaXgoNC41MTg0NjM1LDAsMCwtNC41MTg0NjM1LDM3OC41MzIxOCwxMDYwLjgzMTgpIgogICAgICAgY2xpcC1wYXRoPSJ1cmwoI2NsaXBQYXRoMjEwLTcpIiAvPgogICAgPHBhdGgKICAgICAgIGlkPSJwYXRoMjExLTIiCiAgICAgICBkPSJtIDAsMCBjIC01LjM3NSwwIC0xMC40MjMsMi4wODggLTE0LjIxMyw1Ljg3NiBsIC03Ljc0MSw3Ljc0MSAxMC42NzQsMTAuNjcxIDcuNzQsLTcuNzM5IGMgMC45NDYsLTAuOTQ4IDIuMjA0LC0xLjQ2NyAzLjU0LC0xLjQ2NyAxLjM0LDAgMi41OTgsMC41MTkgMy41NDMsMS40NjcgbCAxMC43MTYsMTAuNzE0IGMgMS45NjUsMS45NjkgMy4wNDcsNC41ODIgMy4wNDcsNy4zNiAwLDIuNzc1IC0xLjA4Miw1LjM4OCAtMy4wNDQsNy4zNTUgLTEuMTg2LDEuMTg2IC0yLjYwNywyLjA0OSAtNC4xNiwyLjU0OCAzLjY2NCwyLjMxOCA3LjQsMy41NDggMTAuOTE2LDMuNTQ4IDMuODMzLDAgNy4xNzMsLTEuNDc3IDkuNjg3LC00LjI4IDEuMTIzLC0yLjkwNyAxLjY5MiwtNS45OTMgMS42OTIsLTkuMTcxIDAsLTYuODExIC0yLjY1MSwtMTMuMjEyIC03LjQ2NCwtMTguMDI5IEwgMTQuMjExLDUuODc2IEMgMTAuNDI0LDIuMDg2IDUuMzc3LDAgMCwwIgogICAgICAgc3R5bGU9ImZpbGw6IzE5YWViYjtmaWxsLW9wYWNpdHk6MTtmaWxsLXJ1bGU6bm9uemVybztzdHJva2U6bm9uZSIKICAgICAgIHRyYW5zZm9ybT0ibWF0cml4KDQuNTE4NDYzNSwwLDAsLTQuNTE4NDYzNSw2NDUuMjQ0OTEsMTAzMy42NDYpIgogICAgICAgY2xpcC1wYXRoPSJ1cmwoI2NsaXBQYXRoMjEyLTMpIiAvPgogICAgPHBhdGgKICAgICAgIGlkPSJwYXRoMjEzLTciCiAgICAgICBkPSJtIDAsMCBjIC0xLjkyMiwxLjkyMyAtNC4zNjEsMy4xNDEgLTcuMDA2LDMuNTE5IDMuNTAyLDIuNzE4IDcuNzg4LDQuMTkzIDEyLjMwNSw0LjE5MyA1LjM3NSwwIDEwLjQyMywtMi4wODkgMTQuMjExLC01Ljg3NyBMIDI3LjI1LC01LjkwNSAxNi41NzksLTE2LjU3OCAwLDAiCiAgICAgICBzdHlsZT0iZmlsbDojMTlhZWJiO2ZpbGwtb3BhY2l0eToxO2ZpbGwtcnVsZTpub256ZXJvO3N0cm9rZTpub25lIgogICAgICAgdHJhbnNmb3JtPSJtYXRyaXgoNC41MTg0NjM1LDAsMCwtNC41MTg0NjM1LDM5MS45MDE4Niw4MTcuOTc3NTEpIgogICAgICAgY2xpcC1wYXRoPSJ1cmwoI2NsaXBQYXRoMjE0LTYpIiAvPgogIDwvZz4KPC9zdmc+Cg==" alt="Jaswik Ventures logo"><span>Jaswik Ventures</span></a>
+      <div class="nav-links" id="navLinks">
+        <a href="#services">Services</a><a href="#jalankush">Jalankush IoT</a><a href="#process">Process</a><a href="#quote">Instant Quote</a>
+      </div>
+      <div class="nav-actions"><a class="btn btn-primary" href="#quote">Get a Quote <span>↗</span></a><button class="menu-btn" id="menuBtn" aria-label="Toggle menu" aria-expanded="false">☰</button></div>
+    </nav>
+  </div>
+
+  <main>
+    <section class="hero" id="home">
+      <div class="container hero-grid">
+        <div>
+          <div class="eyebrow">Hardware engineering studio · India</div>
+          <h1>From Concept to <span>Production-Ready</span> Hardware.</h1>
+          <p class="hero-copy">Jaswik Ventures provides fast, reliable PCB design, KiCad layout, and end-to-end IoT product engineering for startups and businesses.</p>
+          <div class="hero-buttons"><a class="btn btn-primary" href="#quote">Calculate PCB Quote <span>↘</span></a><a class="btn btn-outline" href="#jalankush">Explore Jalankush IoT <span>↗</span></a></div>
+          <div class="hero-meta"><span><b>✓</b> KiCad-first design workflow</span><span><b>✓</b> DFM-aware engineering</span><span><b>✓</b> Startup-friendly delivery</span></div>
+        </div>
+        <div class="hero-visual" aria-label="Abstract printed circuit board illustration">
+          <div class="board pcb-board" aria-label="Decorative PCB illustration with components and animated current flow">
+            <div class="trace t1 pulse"></div><div class="trace t2 pulse"></div><div class="trace t3 pulse"></div>
+            <div class="trace t4 pulse"></div><div class="trace t5 pulse"></div><div class="trace t6 pulse"></div>
+            <div class="trace t7 pulse"></div><div class="trace t8 pulse"></div><div class="trace t9 pulse"></div>
+            <div class="chip">JASWIK<br>HW / 01</div>
+            <div class="pcb-part resistor part-r1"><i></i><i></i></div>
+            <div class="pcb-part resistor part-r2"><i></i><i></i></div>
+            <div class="pcb-part capacitor part-c1"></div><div class="pcb-part capacitor part-c2"></div>
+            <div class="pcb-part connector part-j1"><i></i><i></i><i></i><i></i></div>
+            <div class="pcb-part ic-small part-u1"><span>IC</span></div>
+            <div class="via via1"></div><div class="via via2"></div><div class="via via3"></div><div class="via via4"></div>
+            <div class="board-label">PCB ENGINEERING // REV 01</div>
+          </div>
+          <div class="float-tag tag-a">KiCad-ready<small>Design & documentation</small></div>
+          <div class="float-tag tag-b">2–6+ Layers<small>From prototype to product</small></div>
+        </div>
+      </div>
+    </section>
+
+    <div class="trust-strip"><div class="container trust-inner"><strong>Engineering built around your product goals</strong><span class="trust-item"><i class="dot"></i> Schematic to layout</span><span class="trust-item"><i class="dot"></i> Design for manufacturing</span><span class="trust-item"><i class="dot"></i> Hardware + firmware</span><span class="trust-item"><i class="dot"></i> IoT product development</span></div></div>
+
+    <section class="section services" id="services">
+      <div class="container">
+        <div class="section-head"><div class="eyebrow">What we do</div><h2>Engineering services for your next hardware build.</h2><p>Practical engineering support across the product development cycle—from the first circuit decisions to manufacturing-ready design files.</p></div>
+        <div class="service-grid">
+          <article class="service-card"><div class="service-icon">⌁</div><h3>Schematic & Circuit Design</h3><p>Component selection, power management, microcontroller integration and clear, reviewable circuit documentation.</p><span class="mini">01 / ELECTRONICS DESIGN</span></article>
+          <article class="service-card"><div class="service-icon">▦</div><h3>Multi-Layer PCB Layout</h3><p>Clean 2 to 6+ layer routing in KiCad, with design-rule checks and attention to manufacturability.</p><span class="mini">02 / PCB ENGINEERING</span></article>
+          <article class="service-card"><div class="service-icon">⌗</div><h3>DFM & BOM Optimization</h3><p>JLCPCB/LCSC sourcing checks, cost-conscious component choices and assembly-ready Gerber outputs.</p><span class="mini">03 / PRODUCTION READINESS</span></article>
+          <article class="service-card"><div class="service-icon">⌘</div><h3>IoT Prototyping & Firmware</h3><p>ESP32/ARM hardware bring-up, sensor interfacing, embedded development and enclosure STEP files.</p><span class="mini">04 / CONNECTED PRODUCTS</span></article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section product-section" id="jalankush">
+      <div class="container product-grid">
+        <div class="product-art" aria-label="Illustration of a connected water tank sensor">
+          <span class="product-pill">IN-HOUSE IoT PRODUCT</span><div class="tank" id="jalankushTank"><div class="water-fill" id="tankWaterFill"></div><div class="waterline" id="tankWaterline"></div><div class="sensor" id="tankPercent" aria-label="Animated illustrative water level">58%</div></div><div class="product-stat">JALANKUSH&nbsp; <strong>LEVEL SENSOR</strong><br><span style="color:#94a3b8;font-size:.62rem">ANIMATION PREVIEW · AUTO MODE</span></div>
+        </div>
+        <div>
+          <div class="eyebrow">Flagship product · jalankush.in</div>
+          <h2>Meet <span>Jalankush.</span><br>Smarter water management.</h2>
+          <p>Jalankush is Jaswik Ventures' flagship in-house IoT product: an intelligent water tank monitoring and automated pump control system designed to make everyday water management more dependable.</p>
+          <div class="product-features">
+            <div class="product-feature"><span class="check">✓</span><span><b>Real-time water level tracking</b><br>Know your tank level at a glance.</span></div>
+            <div class="product-feature"><span class="check">✓</span><span><b>Automated dry-run protection</b><br>Help protect pumps from running without water.</span></div>
+            <div class="product-feature"><span class="check">✓</span><span><b>Mobile alerts</b><br>Get useful status and event notifications.</span></div>
+            <div class="product-feature"><span class="check">✓</span><span><b>Industrial-grade sensor reliability</b><br>Designed for dependable day-to-day operation.</span></div>
+          </div>
+          <a class="btn btn-primary" href="https://jalankush.in" target="_blank" rel="noopener noreferrer">Visit Jalankush.in <span>→</span></a>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="process">
+      <div class="container">
+        <div class="section-head"><div class="eyebrow">A clear path to handover</div><h2>Four steps. No guesswork.</h2><p>A straightforward workflow keeps engineering decisions visible and helps reduce surprises when your design moves toward manufacturing.</p></div>
+        <div class="process-grid">
+          <article class="step"><span class="step-no">01 / DISCOVER</span><h3>Requirement & Schematic Review</h3><p>Review your product requirements, existing circuit and design constraints.</p></article>
+          <article class="step"><span class="step-no">02 / DESIGN</span><h3>KiCad Layout & 3D Modeling</h3><p>Develop the PCB layout, component placement and relevant 3D board views.</p></article>
+          <article class="step"><span class="step-no">03 / VERIFY</span><h3>DFM & BOM Verification</h3><p>Check design rules, manufacturing constraints and component availability.</p></article>
+          <article class="step"><span class="step-no">04 / HANDOVER</span><h3>Manufacturing File Handover</h3><p>Deliver agreed Gerbers, BOM, drill files and KiCad source project.</p></article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section quote-section" id="quote">
+      <div class="container quote-layout">
+        <div class="quote-intro"><div class="eyebrow">Instant PCB estimate</div><h2>Scope your board. Get a clear starting estimate.</h2><p>Share a few project details to see an indicative design quote, a transparent cost breakdown and an estimated delivery window.</p>
+          <div class="quote-points"><div class="quote-point"><b>✓</b><span>Live pricing in INR or USD</span></div><div class="quote-point"><b>✓</b><span>Technical add-ons itemized</span></div><div class="quote-point"><b>✓</b><span>Live PCB design quotation</span></div></div>
+        </div>
+        <div class="calculator">
+          <div class="calc-top"><div><h3>PCB Design Quotation</h3><p>Live quotation based on the scope selected below</p></div><div class="currency-switch" role="group" aria-label="Choose currency"><button type="button" id="inrBtn" class="active">₹ INR</button><button type="button" id="usdBtn">$ USD</button></div></div>
+          <div class="calc-body">
+            <div class="form-grid">
+              <div class="field"><label for="layers">Layer count</label><select id="layers"><option value="2" selected>2-Layer</option><option value="4">4-Layer</option><option value="6">6+ Layers</option></select><span class="field-hint">More copper layers can support denser routing and more complex boards.</span></div>
+              <div class="field"><label for="components">Estimated component count</label><div class="range-row"><input id="components" type="range" min="10" max="300" value="30"><output class="range-value" id="componentValue">30 parts</output></div><span class="field-hint">Count ICs, connectors, resistors, capacitors and other placed parts.</span></div>
+              <div class="field full"><span class="field-title">Project starting point</span><div class="choice-list">
+                <label class="choice"><input type="radio" name="starting" value="verified" checked><span class="choice-copy"><strong>Verified KiCad schematic <span class="mono" style="color:#137B83">+₹0</span></strong><small>You already have a checked KiCad circuit schematic ready for PCB layout.</small></span></label>
+                <label class="choice"><input type="radio" name="starting" value="pdf"><span class="choice-copy"><strong>PDF / hand-drawn schematic <span class="mono" style="color:#137B83">+₹2,500</span></strong><small>You have a circuit drawing or PDF that needs to be interpreted and recreated in KiCad.</small></span></label>
+                <label class="choice"><input type="radio" name="starting" value="scratch"><span class="choice-copy"><strong>Full circuit design from scratch <span class="mono" style="color:#137B83">+₹6,000</span></strong><small>You have the product idea or requirements, and need the circuit and schematic designed.</small></span></label>
+              </div></div>
+              <div class="field full"><span class="field-title">Technical complexity</span><div class="choice-list">
+                <label class="choice"><input type="checkbox" class="complexity" value="fine"><span class="choice-copy"><strong>Fine-pitch QFN / BGA / 0201 components</strong><small>Very small chips or tiny components with closely spaced pins. These need more precise placement and careful routing.</small></span></label>
+                <label class="choice"><input type="checkbox" class="complexity" value="highspeed"><span class="choice-copy"><strong>High-speed / impedance control</strong><small>For fast interfaces such as USB, Ethernet or differential pairs. Tracks must be routed with controlled electrical characteristics to help preserve signal quality.</small></span></label>
+                <label class="choice"><input type="checkbox" class="complexity" value="rf"><span class="choice-copy"><strong>RF / wireless antenna layout</strong><small>For BLE, Wi-Fi or LoRa connectivity. Antenna placement and surrounding copper/layout need special care for reliable wireless performance.</small></span></label>
+                <label class="choice"><input type="checkbox" class="complexity" value="mechanical"><span class="choice-copy"><strong>Strict enclosure constraints</strong><small>The PCB must fit a specific case or mechanical design, including mounting holes, connector positions and board outline.</small></span></label>
+              </div></div>
+              <div class="field full"><span class="field-title">Add-on deliverables</span><div class="choice-list">
+                <label class="choice"><input type="checkbox" class="addon" value="bom"><span class="choice-copy"><strong>BOM optimization & sourcing</strong><small>Review component prices and availability, including LCSC/JLCPCB options, to help control assembly cost.</small></span></label>
+                <label class="choice"><input type="checkbox" class="addon" value="step"><span class="choice-copy"><strong>3D STEP export</strong><small>A 3D model of the PCB and components that a mechanical designer can use to check fit inside the enclosure.</small></span></label>
+                <label class="choice"><input type="checkbox" class="addon" value="footprints"><span class="choice-copy"><strong>Custom KiCad footprints</strong><small>Create a PCB land pattern for a part that is missing or needs a verified custom footprint.</small><div class="custom-count"><label for="customParts">Estimated custom parts</label><input id="customParts" type="number" min="1" max="100" value="1" disabled></div></span></label>
+              </div></div>
+              <div class="field full"><span class="field-title">Turnaround speed</span><div class="choice-list">
+                <label class="choice"><input type="radio" name="speed" value="standard" checked><span class="choice-copy"><strong>Standard · 7–10 days <span class="mono" style="color:#137B83">1.0×</span></strong><small>Regular design queue and review time.</small></span></label>
+                <label class="choice"><input type="radio" name="speed" value="rush"><span class="choice-copy"><strong>Rush · 3–4 days <span class="mono" style="color:#137B83">1.35×</span></strong><small>Priority scheduling, subject to project scope and availability.</small></span></label>
+              </div></div>
+            </div>
+            <hr class="calc-divider">
+            <div class="result" aria-live="polite">
+              <div class="result-head"><strong>Quotation total (including GST)</strong><span>INCLUSIVE OF GST</span></div>
+              <div class="total-range" id="priceRange">₹0</div><div class="total-note" id="baseTotal">Design charges before GST: ₹0</div>
+              <div class="breakdown" id="breakdown"></div>
+              <div class="delivery"><span>Target delivery</span><strong id="deliveryDays">7–10 days</strong></div>
+              <div class="breakdown" id="taxBreakdown"></div>
+              <form id="enquiryForm" class="enquiry-form">
+                <div class="enquiry-fields">
+                  <div class="field"><label for="customerName">Your name <span aria-hidden="true">*</span></label><input id="customerName" name="customerName" type="text" autocomplete="name" placeholder="Enter your full name" minlength="2" maxlength="80" required></div>
+                  <div class="field"><label for="customerMobile">Mobile number <span aria-hidden="true">*</span></label><input id="customerMobile" name="customerMobile" type="tel" inputmode="tel" autocomplete="tel" placeholder="+91 98765 43210" pattern="[+]?[0-9() .-]{8,20}" required><span class="field-hint">Include country code for international numbers.</span></div>
+                </div>
+                <div class="enquiry-actions">
+                  <button class="btn btn-primary contact-quote-btn" id="contactQuote" type="submit">Send Enquiry <span>↗</span></button>
+                  <button class="btn btn-whatsapp" id="whatsappEnquiry" type="button">Enquire via WhatsApp <span>↗</span></button>
+                </div>
+                <p class="enquiry-help" id="enquiryStatus" role="status" aria-live="polite">Submit securely through our website, or continue via WhatsApp. No email application required.</p>
+                <input type="text" id="website" name="website" tabindex="-1" autocomplete="off" aria-hidden="true" class="honeypot">
+              </form>
+              <p class="disclaimer">This quotation is based on the scope and specifications selected above and includes GST at the displayed rate. It covers only the listed design services and deliverables. If approved design requirements change, or additional features, services or out-of-scope revisions are requested, the price may change. Any additional charges will be shared for your approval before work begins. PCB fabrication, components and shipping are extra unless expressly included.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="contact" id="contact">
+      <div class="container contact-grid"><div><div class="eyebrow">Have a hardware idea?</div><h2>Let's engineer what's next.</h2><p>Tell us what you're building. We'll help you understand the engineering scope, key decisions and a practical next step.</p></div><div class="contact-actions"><a class="btn btn-primary" href="mailto:info@jaswikventures.in">Email our team ↗</a><a class="btn btn-outline" style="background:transparent;color:white;border-color:#64748b" href="https://wa.me/?text=Hello%20Jaswik%20Ventures%2C%20I%27d%20like%20to%20discuss%20a%20PCB%20or%20IoT%20project." target="_blank" rel="noopener noreferrer">WhatsApp inquiry ↗</a></div></div>
+    </section>
+  </main>
+  <footer class="footer"><div class="container footer-inner"><div><span class="footer-brand">Jaswik Ventures</span> · Hardware engineering studio</div><div class="footer-links"><a href="mailto:info@jaswikventures.in">info@jaswikventures.in</a><span>India</span><a href="https://jalankush.in" target="_blank" rel="noopener noreferrer">Jalankush IoT</a></div><div>© <span id="year"></span> Jaswik Ventures. All rights reserved.</div></div></footer>
+
+  <script>
+    // ============================================================
+    // EDIT PRICES HERE. Values are in INR and USD respectively.
+    // GST is shown separately as an additional estimated tax amount.
+    // ============================================================
+    const PRICING_CONFIG = {
+      baseLayout: {
+        "2": { inr: 4000, usd: 75 },
+        "4": { inr: 18000, usd: 320 },
+        "6": { inr: 32000, usd: 550 }
+      },
+      componentAllowance: 30,
+      extraComponent: { inr: 50, usd: 1 },
+      startingPoint: {
+        verified: { inr: 0, usd: 0, label: "Verified KiCad schematic" },
+        pdf: { inr: 2500, usd: 45, label: "PDF / hand-drawn schematic" },
+        scratch: { inr: 6000, usd: 110, label: "Full circuit design from scratch" }
+      },
+      complexity: {
+        fine: { inr: 2000, usd: 35, label: "Fine-pitch QFN / BGA / 0201" },
+        highspeed: { inr: 2500, usd: 45, label: "High-speed / impedance control" },
+        rf: { inr: 2000, usd: 35, label: "RF / antenna layout" },
+        mechanical: { inr: 1500, usd: 25, label: "Strict enclosure constraints" }
+      },
+      addons: {
+        bom: { inr: 1500, usd: 25, label: "BOM optimization & sourcing" },
+        step: { inr: 1000, usd: 20, label: "3D STEP export" },
+        footprints: { inr: 400, usd: 8, label: "Custom KiCad footprints", perPart: true }
+      },
+      rushMultiplier: 1.35,
+      standardDays: "7–10 days",
+      rushDays: "3–4 days",
+      estimateBuffer: 0.10,
+      gstRate: 0.18
+    }
+
+    // ================= ENQUIRY INTEGRATION SETTINGS =================
+    // Set these after creating your Supabase project and Edge Function.
+    const ENQUIRY_CONFIG = {
+      // Example: https://YOUR_PROJECT_REF.supabase.co/functions/v1/submit-enquiry
+      endpoint: "PASTE_YOUR_SUPABASE_EDGE_FUNCTION_URL_HERE",
+      // International format, digits only, no +, spaces or punctuation.
+      // Example for India: "919876543210"
+      whatsappNumber: ""
+    };
+;
+
+    (() => {
+      const $ = (id) => document.getElementById(id);
+      const STORAGE_KEY = "jaswikVenturesPricingConfigV1";
+      let config = structuredCloneSafe(PRICING_CONFIG);
+      let currency = "inr";
+      const fmt = (amount) => currency === "inr"
+        ? new Intl.NumberFormat("en-IN", { style:"currency", currency:"INR", maximumFractionDigits:0 }).format(amount)
+        : new Intl.NumberFormat("en-US", { style:"currency", currency:"USD", maximumFractionDigits:0 }).format(amount);
+      function structuredCloneSafe(obj){ return JSON.parse(JSON.stringify(obj)); }
+      function getChecked(name){ return document.querySelector(`input[name="${name}"]:checked`).value; }
+      function addRow(label, amount, rows){ if(amount !== 0) rows.push({label, amount}); }
+
+      function calculate(){
+        const layer = $("layers").value;
+        const parts = Number($("components").value);
+        const excess = Math.max(0, parts - Number(config.componentAllowance || 30));
+        const starting = getChecked("starting");
+        const rush = getChecked("speed") === "rush";
+        const rows = [];
+        let subtotal = 0;
+        const base = config.baseLayout[layer][currency];
+        rows.push({label:`${layer === "6" ? "6+ layer" : layer + "-layer"} base PCB layout`, amount:base});
+        subtotal += base;
+
+        const componentCost = excess * config.extraComponent[currency];
+        addRow(`Additional components (${excess} × ${fmt(config.extraComponent[currency])})`, componentCost, rows);
+        subtotal += componentCost;
+
+        const startCost = config.startingPoint[starting][currency];
+        addRow(config.startingPoint[starting].label, startCost, rows);
+        subtotal += startCost;
+
+        document.querySelectorAll(".complexity:checked").forEach(el => {
+          const item = config.complexity[el.value];
+          rows.push({label:item.label, amount:item[currency]});
+          subtotal += item[currency];
+        });
+        document.querySelectorAll(".addon:checked").forEach(el => {
+          const item = config.addons[el.value];
+          let amount = item[currency];
+          let label = item.label;
+          if(item.perPart){ const count = Math.max(1, Math.min(100, Number($("customParts").value) || 1)); amount *= count; label += ` (${count} part${count===1?"":"s"})`; }
+          rows.push({label, amount}); subtotal += amount;
+        });
+
+        const multiplier = rush ? Number(config.rushMultiplier) : 1;
+        const total = subtotal * multiplier;
+        if(rush) rows.push({label:`Rush scheduling (${multiplier.toFixed(2)}×)`, amount:total-subtotal});
+        const gstRate = Number(config.gstRate ?? 0.18);
+        const gst = total * gstRate;
+        const totalWithGst = total + gst;
+        $("priceRange").textContent = fmt(totalWithGst);
+        $("baseTotal").textContent = `Design charges before GST: ${fmt(total)} · GST (${(gstRate*100).toFixed(0)}%) included below`;
+        $("deliveryDays").textContent = rush ? config.rushDays : config.standardDays;
+        $("componentValue").textContent = `${parts} parts`;
+        $("breakdown").innerHTML = rows.map(row => `<div class="break-row"><span>${escapeHtml(row.label)}</span><span>${fmt(row.amount)}</span></div>`).join("") +
+          `<div class="break-row total"><span>Design subtotal (before GST)</span><span>${fmt(total)}</span></div>`;
+        $("taxBreakdown").innerHTML =
+          `<div class="break-row"><span>GST (${(gstRate*100).toFixed(0)}%) — extra</span><span>${fmt(gst)}</span></div>` +
+          `<div class="break-row total"><span>Final quotation total (including GST)</span><span>${fmt(totalWithGst)}</span></div>`;
+        return {layer,parts,starting,rush,rows,total,gst,gstRate,totalWithGst,delivery:rush?config.rushDays:config.standardDays};
+      }
+      function escapeHtml(value){return String(value).replace(/[&<>"']/g, c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));}
+
+      function quoteText(result){
+        const complexities = [...document.querySelectorAll(".complexity:checked")].map(el=>config.complexity[el.value].label);
+        const addons = [...document.querySelectorAll(".addon:checked")].map(el=>{
+          const item=config.addons[el.value];
+          return item.perPart ? `${item.label} (${Math.max(1,Number($("customParts").value)||1)} part(s))` : item.label;
+        });
+        return [
+          "PCB DESIGN QUOTATION — Jaswik Ventures",
+          `Currency: ${currency.toUpperCase()}`,
+          `Board: ${result.layer === "6" ? "6+ Layers" : result.layer + "-Layer"} | Estimated components: ${result.parts}`,
+          `Starting point: ${config.startingPoint[result.starting].label}`,
+          `Technical complexity: ${complexities.length?complexities.join(", "):"None selected"}`,
+          `Add-on deliverables: ${addons.length?addons.join(", "):"None selected"}`,
+          `Turnaround: ${result.rush?"Rush":"Standard"} (${result.delivery})`,
+          "",
+          "QUOTATION BREAKDOWN:",
+          ...result.rows.map(row=>`- ${row.label}: ${fmt(row.amount)}`),
+          `Design subtotal before GST: ${fmt(result.total)}`,
+          `GST (${(result.gstRate*100).toFixed(0)}%): ${fmt(result.gst)}`,
+          `FINAL QUOTATION TOTAL (INCLUDING GST): ${fmt(result.totalWithGst)}`,
+          `Target delivery: ${result.delivery}`,
+          "",
+          "Quotation terms: This quotation is based on the project scope and specifications selected/provided at the time of quotation. It covers only the services and deliverables listed. Changes to approved design requirements, additional features or services, or revisions outside the agreed scope may incur additional charges. Any additional work will be quoted separately and started only after customer approval. PCB fabrication, components and shipping are excluded unless specifically listed."
+        ].join("\n");
+      }
+
+      function render(){
+        const footprintOption = document.querySelector('input.addon[value="footprints"]');
+        $("customParts").disabled = !(footprintOption && footprintOption.checked);
+        return calculate();
+      }
+      // Sliders update on input; change also supports radio/checkbox interactions across browsers.
+      document.querySelectorAll("#layers,#components,#customParts,input[name='starting'],input[name='speed'],.complexity,.addon").forEach(el=>{
+        el.addEventListener("input",render);
+        el.addEventListener("change",render);
+      });
+      $("inrBtn").addEventListener("click",()=>{currency="inr";$("inrBtn").classList.add("active");$("usdBtn").classList.remove("active");render();});
+      $("usdBtn").addEventListener("click",()=>{currency="usd";$("usdBtn").classList.add("active");$("inrBtn").classList.remove("active");render();});
+      $("customerMobile").addEventListener("input",()=>{
+        const digits=customerMobile.replace(/\\D/g,"");
+        $("customerMobile").setCustomValidity(digits.length>=8 && digits.length<=15 ? "" : "Enter a valid mobile number with 8–15 digits, including country code if needed.");
+      });
+      const enquiryStatus = $("enquiryStatus");
+      function setEnquiryStatus(message, state=""){
+        enquiryStatus.textContent = message;
+        enquiryStatus.dataset.state = state;
+      }
+      function getEnquiryPayload(){
+        const customerName = $("customerName").value.trim();
+        const customerMobile = $("customerMobile").value.trim();
+        const digits = customerMobile.replace(/\D/g,"");
+        $("customerName").setCustomValidity(customerName.length >= 2 ? "" : "Please enter your name.");
+        $("customerMobile").setCustomValidity(digits.length >= 8 && digits.length <= 15 ? "" : "Enter a valid mobile number with 8–15 digits.");
+        if (!$("enquiryForm").reportValidity()) return null;
+        const result = render();
+        return {
+          customer_name: customerName,
+          mobile_number: customerMobile,
+          currency: currency.toUpperCase(),
+          layer_count: result.layer === "6" ? "6+" : result.layer,
+          component_count: result.parts,
+          starting_point: config.startingPoint[result.starting].label,
+          technical_complexity: [...document.querySelectorAll(".complexity:checked")].map(el=>config.complexity[el.value].label),
+          addons: [...document.querySelectorAll(".addon:checked")].map(el=>{
+            const item=config.addons[el.value];
+            return item.perPart ? `${item.label} (${Math.max(1,Number($("customParts").value)||1)} part(s))` : item.label;
+          }),
+          custom_parts: Number($("customParts").value)||0,
+          turnaround: result.rush ? "Rush (3–4 days)" : "Standard (7–10 days)",
+          design_subtotal: Number(result.total.toFixed(2)),
+          gst_rate: Number(result.gstRate),
+          gst_amount: Number(result.gst.toFixed(2)),
+          quotation_total: Number(result.totalWithGst.toFixed(2)),
+          delivery_days: result.delivery,
+          quote_breakdown: result.rows.map(row=>({label:row.label,amount:Number(row.amount.toFixed(2))})),
+          quote_text: quoteText(result),
+          website: $("website").value
+        };
+      }
+      $("enquiryForm").addEventListener("submit", async (event)=>{
+        event.preventDefault();
+        const submitButton = $("contactQuote");
+        const payload = getEnquiryPayload();
+        if (!payload) return;
+        if (payload.website) return; // honeypot: silently reject bots
+        if (!ENQUIRY_CONFIG.endpoint || ENQUIRY_CONFIG.endpoint.includes("PASTE_YOUR_")){
+          setEnquiryStatus("Website submission is not configured yet. Please contact info@jaswikventures.in while setup is completed.","error");
+          return;
+        }
+        submitButton.disabled = true;
+        submitButton.textContent = "Submitting…";
+        setEnquiryStatus("Submitting your enquiry securely…","pending");
+        try {
+          const response = await fetch(ENQUIRY_CONFIG.endpoint,{
+            method:"POST",
+            headers:{"Content-Type":"application/json"},
+            body:JSON.stringify(payload)
+          });
+          const data = await response.json().catch(()=>({}));
+          if (!response.ok) throw new Error(data.error || "Submission failed. Please try again.");
+          setEnquiryStatus(`Enquiry received successfully. Your reference number is ${data.enquiry_id || "confirmed"}. We will contact you shortly.`,"success");
+          $("enquiryForm").reset();
+          render();
+        } catch(error) {
+          setEnquiryStatus(`${error.message} You can alternatively enquire via WhatsApp.`,"error");
+        } finally {
+          submitButton.disabled = false;
+          submitButton.innerHTML = 'Send Enquiry <span>↗</span>';
+        }
+      });
+      $("whatsappEnquiry").addEventListener("click",()=>{
+        const payload = getEnquiryPayload();
+        if (!payload) return;
+        if (!ENQUIRY_CONFIG.whatsappNumber){
+          setEnquiryStatus("WhatsApp destination is not configured yet. Add your full WhatsApp Business number in ENQUIRY_CONFIG.","error");
+          return;
+        }
+        const message = `Hello Jaswik Ventures, I would like to enquire about this PCB design project.\n\nCustomer: ${payload.customer_name}\nMobile: ${payload.mobile_number}\n\n${payload.quote_text}\n\nDesign subtotal: ${payload.currency} ${payload.design_subtotal}\nGST: ${payload.currency} ${payload.gst_amount}\nTotal including GST: ${payload.currency} ${payload.quotation_total}\n\nPlease contact me to discuss the project.`;
+        const phone = ENQUIRY_CONFIG.whatsappNumber.replace(/\D/g,"");
+        window.open(`https://wa.me/${phone}?text=${encodeURIComponent(message)}`,"_blank","noopener,noreferrer");
+      });
+
+      $("menuBtn").addEventListener("click",()=>{const open=$("navLinks").classList.toggle("open");$("menuBtn").setAttribute("aria-expanded",String(open));$("menuBtn").textContent=open?"×":"☰";});
+      $("navLinks").querySelectorAll("a").forEach(a=>a.addEventListener("click",()=>{$("navLinks").classList.remove("open");$("menuBtn").setAttribute("aria-expanded","false");$("menuBtn").textContent="☰";}));
+      // Decorative tank-level animation (illustrative only; not live device telemetry).
+      const tankFill = $("tankWaterFill"), tankLine = $("tankWaterline"), tankPercent = $("tankPercent");
+      if (tankFill && tankLine && tankPercent) {
+        const reducedMotion = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+        if (reducedMotion) {
+          tankFill.style.height = "58%"; tankLine.style.bottom = "58%"; tankPercent.textContent = "58%";
+        } else {
+          const animateTank = (now) => {
+            const level = 22 + (Math.sin(now / 5200) + 1) * 32; // smoothly cycles between 22% and 86%
+            const value = Math.round(level);
+            tankFill.style.height = level.toFixed(1) + "%";
+            tankLine.style.bottom = level.toFixed(1) + "%";
+            tankPercent.textContent = value + "%";
+            window.requestAnimationFrame(animateTank);
+          };
+          window.requestAnimationFrame(animateTank);
+        }
+      }
+      $("year").textContent=new Date().getFullYear();
+      try { render(); }
+      catch(error) {
+        console.error("PCB calculator initialization failed:", error);
+        $("priceRange").textContent = "Calculator unavailable";
+        $("baseTotal").textContent = "Please reload the page or reset saved pricing.";
+        $("breakdown").textContent = "There is a calculator configuration issue. Please contact Jaswik Ventures for assistance.";
+      }
+    })();
+  </script>
+</body>
+</html>
