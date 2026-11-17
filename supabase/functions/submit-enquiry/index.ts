@@ -10,17 +10,27 @@
 
 import { createClient } from "https://esm.sh/@supabase/supabase-js@2";
 
-const corsHeaders = {
-  "Access-Control-Allow-Origin": Deno.env.get("ALLOWED_ORIGIN") ?? "https://jaswikventures.in",
-  "Access-Control-Allow-Headers": "authorization, x-client-info, apikey, content-type",
-  "Access-Control-Allow-Methods": "POST, OPTIONS",
-  "Vary": "Origin",
-};
+const allowedOrigins = new Set([
+  "https://jaswikventures.in",
+  "https://www.jaswikventures.in",
+]);
 
-function json(body: unknown, status = 200) {
+function corsHeaders(origin: string | null): Record<string, string> {
+  const headers: Record<string, string> = {
+    "Access-Control-Allow-Headers": "authorization, x-client-info, apikey, content-type",
+    "Access-Control-Allow-Methods": "POST, OPTIONS",
+    "Vary": "Origin",
+  };
+  if (origin && allowedOrigins.has(origin)) {
+    headers["Access-Control-Allow-Origin"] = origin;
+  }
+  return headers;
+}
+
+function json(body: unknown, status = 200, origin: string | null = null) {
   return new Response(JSON.stringify(body), {
     status,
-    headers: { ...corsHeaders, "Content-Type": "application/json" },
+    headers: { ...corsHeaders(origin), "Content-Type": "application/json" },
   });
 }
 function cleanString(value: unknown, max: number) {
@@ -32,14 +42,20 @@ function safeNumber(value: unknown, min = 0, max = 1_000_000) {
 }
 
 Deno.serve(async (req) => {
-  if (req.method === "OPTIONS") return new Response("ok", { headers: corsHeaders });
-  if (req.method !== "POST") return json({ error: "Method not allowed" }, 405);
+  const origin = req.headers.get("Origin");
+  if (req.method === "OPTIONS") {
+    if (origin && !allowedOrigins.has(origin)) {
+      return new Response("Origin not allowed", { status: 403 });
+    }
+    return new Response("ok", { status: 204, headers: corsHeaders(origin) });
+  }
+  if (req.method !== "POST") return json({ error: "Method not allowed" }, 405, origin);
 
   try {
     const body = await req.json();
 
     // Honeypot: pretend success without storing automated spam.
-    if (cleanString(body.website, 200)) return json({ ok: true });
+    if (cleanString(body.website, 200)) return json({ ok: true }, 200, origin);
 
     const name = cleanString(body.customer_name, 80);
     const mobile = cleanString(body.mobile_number, 24);
@@ -53,12 +69,12 @@ Deno.serve(async (req) => {
     const total = safeNumber(body.quotation_total, 0, 100_000_000);
     const customParts = safeNumber(body.custom_parts ?? 0, 0, 100);
 
-    if (name.length < 2) return json({ error: "Please enter a valid name." }, 400);
-    if (digits.length < 8 || digits.length > 15) return json({ error: "Please enter a valid mobile number." }, 400);
-    if (!["INR", "USD"].includes(currency)) return json({ error: "Invalid currency." }, 400);
-    if (!["2", "4", "6+"].includes(layer)) return json({ error: "Invalid layer count." }, 400);
+    if (name.length < 2) return json({ error: "Please enter a valid name." }, 400, origin);
+    if (digits.length < 8 || digits.length > 15) return json({ error: "Please enter a valid mobile number." }, 400, origin);
+    if (!["INR", "USD"].includes(currency)) return json({ error: "Invalid currency." }, 400, origin);
+    if (!["2", "4", "6+"].includes(layer)) return json({ error: "Invalid layer count." }, 400, origin);
     if (parts === null || subtotal === null || gstRate === null || gst === null || total === null || customParts === null) {
-      return json({ error: "Invalid quotation values." }, 400);
+      return json({ error: "Invalid quotation values." }, 400, origin);
     }
 
     // Treat browser-calculated quote as a submitted snapshot, not a binding
@@ -92,7 +108,7 @@ Deno.serve(async (req) => {
     const { error: insertError } = await supabase.from("pcb_enquiries").insert(row);
     if (insertError) {
       console.error("Supabase insert failed", insertError);
-      return json({ error: "We could not save your enquiry. Please try again shortly." }, 500);
+      return json({ error: "We could not save your enquiry. Please try again shortly." }, 500, origin);
     }
 
     // Email failure must not discard a successfully saved lead.
@@ -133,9 +149,9 @@ Deno.serve(async (req) => {
       }
     }
 
-    return json({ ok: true, enquiry_id: enquiryRef, notification_sent: notificationSent }, 201);
+    return json({ ok: true, enquiry_id: enquiryRef, notification_sent: notificationSent }, 201, origin);
   } catch (error) {
     console.error("Unhandled enquiry error", error);
-    return json({ error: "Invalid request. Please check your details and try again." }, 400);
+    return json({ error: "Invalid request. Please check your details and try again." }, 400, origin);
   }
 });
