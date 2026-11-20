@@ -242,7 +242,7 @@ sup {
   color: white;
 }
 .btn-primary:hover {
-  background: #078e8b;
+  background: #09d6ff;
 }
 .btn-outline {
   border-color: #607489;
@@ -331,7 +331,7 @@ sup {
   width: 46px;
   height: 46px;
   border-radius: 13px;
-  background: #e4f8f6;
+  background: #09d6ff;
   color: var(--teal);
   display: grid;
   place-items: center;
