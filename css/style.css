@@ -2,18 +2,19 @@
 :root {
 
     /* Neutrals */
-  --ink: #182026;
-  --ink-2: #2c363f;
-  --muted: #64748b;
-  --line: #e2e8f0;
-  --surface: #f4f7fa;
+  --ink: #141c24;          /* Deep Charcoal with a subtle cool undertone */
+  --ink-2: #283442;        /* Slate Charcoal for subheadings & dark cards */
+  --muted: #5c6b7a;        /* Muted Slate-Grey for descriptions */
+  --line: #dce3ec;         /* Subtle cool border line */
+  --surface: #f4f7fb;      /* Soft Ice-Blue page tint */
   --white: #ffffff;
-  /* --blue-primary: #2563eb;
-  --blue-accent: #38bdf8; */
-  --blue-primary: #0066ff;
-  --blue-hover: #0052cc;
-  --blue-accent: #0ea5e9;
-  --blue-soft: rgba(0, 102, 255, 0.07);
+
+
+  --blue-deep: #13345e;    /* Matches the dark navy ribbon in your logo */
+  --blue-primary: #2168dc; /* Matches the bright cobalt segments in your logo */
+  --blue-hover: #1952b3;   /* Darker cobalt for hover states */
+  --blue-accent: #3b82f6;  /* Crisp highlight blue for UI accents */
+  --blue-soft: rgba(33, 104, 220, 0.07);
 
   --shadow: 0 18px 55px rgba(24, 32, 38, 0.08);
   --shadow: 0 18px 55px rgba(12, 28, 45, 0.1);
