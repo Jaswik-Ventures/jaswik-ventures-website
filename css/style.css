@@ -1,14 +1,21 @@
 /* Jaswik Ventures — design system */
 :root {
-  --ink: #102033;
-  --ink-2: #1b2d42;
+
+    /* Neutrals */
+  --ink: #182026;
+  --ink-2: #2c363f;
   --muted: #64748b;
-  --line: #ddd;
-  --surface: #f5f8fa;
-  --white: #fff;
-  --teal: #00A6C7;
-  --lime: #b7ef55;
-  --blue: #2e77bd;
+  --line: #e2e8f0;
+  --surface: #f4f7fa;
+  --white: #ffffff;
+  /* --blue-primary: #2563eb;
+  --blue-accent: #38bdf8; */
+  --blue-primary: #0066ff;
+  --blue-hover: #0052cc;
+  --blue-accent: #0ea5e9;
+  --blue-soft: rgba(0, 102, 255, 0.07);
+
+  --shadow: 0 18px 55px rgba(24, 32, 38, 0.08);
   --shadow: 0 18px 55px rgba(12, 28, 45, 0.1);
   --radius: 22px;
   --container: 1160px;
@@ -136,7 +143,7 @@ sup {
   border-radius: 999px;
 }
 .nav-cta span {
-  color: var(--lime);
+  color: var(--primary);
   margin-left: 7px;
 }
 .menu-btn {
@@ -199,15 +206,15 @@ sup {
   text-transform: uppercase;
   letter-spacing: 0.16em;
   font-weight: 800;
-  color: var(--teal);
+  color: var(--blue-primary);
   margin-bottom: 17px;
 }
 .hero .eyebrow {
-  color: var(--lime);
+  color: var(--blue-accent);
 }
 .hero h1 span {
   display: block;
-  color: var(--lime);
+  color: var(--blue-accent);
 }
 .hero-copy {
   max-width: 610px;
@@ -238,11 +245,11 @@ sup {
   transform: translateY(-2px);
 }
 .btn-primary {
-  background: var(--teal);
+  background: var(--blue-primary);
   color: white;
 }
 .btn-primary:hover {
-  background: #09d6ff;
+  background: var(--blue-hover);
 }
 .btn-outline {
   border-color: #607489;
@@ -331,7 +338,7 @@ sup {
   width: 46px;
   height: 46px;
   border-radius: 13px;
-  background: #09d6ff;
+  background: #e4f8f6;
   color: var(--teal);
   display: grid;
   place-items: center;
@@ -567,7 +574,7 @@ sup {
   font-weight: 700;
 }
 .currency-switch button.active {
-  background: var(--lime);
+  background: var(--blue-accent);
   color: var(--ink);
 }
 .calc-body {
@@ -893,5 +900,5 @@ sup {
   margin: 14px 0 0;
 }
 .contact .eyebrow {
-  color: var(--lime);
+  color: var(--blue-accent);
 }
