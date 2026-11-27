@@ -251,7 +251,7 @@
           window.requestAnimationFrame(animateTank);
         }
       }
-      $("year").textContent=new Date().getFullYear();
+      $("year").textContent="2026";
       try { render(); }
       catch(error) {
         console.error("PCB calculator initialization failed:", error);
